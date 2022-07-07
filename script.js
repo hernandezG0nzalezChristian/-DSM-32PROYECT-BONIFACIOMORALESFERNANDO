@@ -10,3 +10,7 @@ document.addEventListener('click', e=> {
     }
 })
 
+function buttonss(){
+location.href= "admin.php"
+
+}

@@ -119,7 +119,7 @@ body{
     color: white;
 }
 
-.formulario input[type="submit"]{
+.formulario input[type="submit"] {
     width: 60%;
     margin: auto;
     border: solid thin white;
@@ -132,6 +132,20 @@ body{
     cursor: pointer;
     color: #222;
 }
+.formula[type="button"] {
+    width: 60%;
+    margin: auto;
+    border: solid thin white;
+    padding: .7rem;
+    border-radius: 2rem;
+    background-color: white;
+    font-weight: 600;
+    margin-top: 3rem;
+    font-size: .8rem;
+    cursor: pointer;
+    color: #222;
+}
+
 
 .sing-in{
     position: absolute;
