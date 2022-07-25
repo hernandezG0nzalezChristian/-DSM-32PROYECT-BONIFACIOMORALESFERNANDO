@@ -100,15 +100,17 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Registros</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Registros:</h6>
+                        <h6 class="collapse-header">Registros:</h6>
                         <a class="collapse-item" href="adminusuarios.php">Usuarios</a>
                         <a class="collapse-item" href="adminconductores.php">Conductores</a>
                         <a class="collapse-item" href="adminreservacion.php">Reservaciones</a>
                         <a class="collapse-item" href="adminrutas.php">Rutas</a>
+                      
+                    
                     </div>
                 </div>
             </li>
@@ -345,7 +347,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Inicio</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Reservaciones</h1>
                     
                                 </i></a>
                     </div>
@@ -354,24 +356,70 @@
                     <div class="row">
 
                   
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        
-
-                        <!-- Pending Requests Card Example -->
-                        
-
-                    <!-- Content Row -->
-
+    
                     <div class="row">
+                    <div class="container-fluid">
 
-                        <!-- Area Chart -->
-                        
-                        <!-- Pie Chart -->
-                        
-                                <!-- Card Body -->
-                                
+                    <table>
+                    
+                            
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Ruta</th>
+                                            <th>Conductor</th>
+                                            <th>Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                           
+                                           
+                                        </tr>
+                                        <?php
+ 
+ $conn=mysqli_connect('localhost','root','','integradora') or die ('Error en la conexion servidosr') ; 
+ $id = $_GET["id"];
+      $consulta= "SELECT * FROM reservaciones where ID='$id'";
+      $resultado= mysqli_query($conn,$consulta); 
 
+      while($row=mysqli_fetch_array($resultado)){
+    ?>
+                                        <tr>
+                                    
+                                           <form action="actualizartreser.php" method="post"> 
+                                           <input type="hidden" name=id value=<?php echo $row['ID']?>>
+                                        <td><input type="text" name=email value=<?php echo $row['Email']?>></td>
+                                        <td><input type="text" name=ruta value=<?php echo $row['Ruta']?>></td>
+                                        <td><input type="text" name=condcutor value=<?php echo $row['Conductor']?>></td>
+                                        <td><input type="date" name=fecha value=<?php echo $row['Fecha']?>></td>
+                                        <td><input type="submit" class="btn btn-primary" value="actualizar" name="register">
+            </tr>         
+      
+                                        </tr>
+      <?php
+      }
+      ?>
+                        
+                                    
+                                        
+                                       
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+
+                </div>
+                
+                <!-- /.container-fluid -->
                
                                 </div>
                             </div>
@@ -400,14 +448,14 @@
 
     </div>
     <!-- End of Page Wrapper -->
+    
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -425,7 +473,7 @@
             </div>
         </div>
     </div>
-
+    
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -442,6 +490,7 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+   
 
 </body>
 
