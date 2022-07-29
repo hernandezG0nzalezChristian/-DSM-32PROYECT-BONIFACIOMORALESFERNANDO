@@ -100,15 +100,17 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Registros</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Registros:</h6>
+                        <h6 class="collapse-header">Registros:</h6>
                         <a class="collapse-item" href="adminusuarios.php">Usuarios</a>
                         <a class="collapse-item" href="adminconductores.php">Conductores</a>
                         <a class="collapse-item" href="adminreservacion.php">Reservaciones</a>
                         <a class="collapse-item" href="adminrutas.php">Rutas</a>
+                      
+                    
                     </div>
                 </div>
             </li>
@@ -345,7 +347,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Inicio</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Rutas</h1>
                     
                                 </i></a>
                     </div>
@@ -354,24 +356,86 @@
                     <div class="row">
 
                   
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        
-
-                        <!-- Pending Requests Card Example -->
-                        
-
-                    <!-- Content Row -->
-
+    
                     <div class="row">
+                    <div class="container-fluid">
 
-                        <!-- Area Chart -->
-                        
-                        <!-- Pie Chart -->
-                        
-                                <!-- Card Body -->
-                                
+                    <table>
+                    
+                            
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre de la Ruta</th>
+                                            <th>Base de Salida</th>
+                                            <th>Base de llegada</th>
+                                            <th>Pardas de la Ruta</th>
+                                            <th>Numero de Camioneta</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                           
+                                           
+                                        </tr>
+                                        <?php
+ 
+ $conn=mysqli_connect('localhost','root','','integradora') or die ('Error en la conexion servidosr') ; 
 
+      $consulta= "SELECT * FROM rutas";
+      $resultado= mysqli_query($conn,$consulta); 
+
+      while($row=mysqli_fetch_array($resultado)){
+    ?>
+                                        <tr>
+                                            <td><?php echo $row['Nombre_rut']?></td>
+                                            <td><?php echo $row['Base_salida']?></td>
+                                            <td><?php echo $row['Base_lleg']?></td>
+                                            <td><?php echo $row['Paradas_rut']?></td>
+                                            <td><?php echo $row['Numero_cam']?></td>
+                                            <td><a href="actualizarrutas.php?id=<?php echo $row['ID'] ?>" class="btn btn-primary">Editar</a> </td>
+                                            <td><a href="deleterutas.php?id=<?php echo $row['ID'] ?>" class="btn btn-primary">Eliminar</a> </td>
+      
+                                            
+                                        
+      
+                                        </tr>
+      <?php
+      }
+      ?>
+      </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+             <th>Agregar</th>                             
+    <td>
+        <form action="agregarrutas.php" method="post">
+            <input type="text" name=nombreruta placeholder="Nombre de la Ruta">
+            <input type="text" name=Basesalida placeholder="Base de Salida">
+            <input type="text" name=Basellegada placeholder="Base de llegada">
+            <input type="text" name=Paradasrut placeholder="Paradas de la Ruta">
+            <input type="text" name=numerocam placeholder="Numero de Camioneta">
+            <input type="submit" class="btn btn-primary" value="Agregar" name="register">
+                            
+                                    
+    </td>         
+                        
+                                    
+                                        
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
                
                                 </div>
                             </div>
@@ -405,9 +469,8 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      <!-- Logout Modal-->
+      <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -426,6 +489,7 @@
         </div>
     </div>
 
+    
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -442,6 +506,7 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+   
 
 </body>
 

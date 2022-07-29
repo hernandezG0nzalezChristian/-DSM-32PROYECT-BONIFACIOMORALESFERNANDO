@@ -100,15 +100,17 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Registros</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Registros:</h6>
+                        <h6 class="collapse-header">Registros:</h6>
                         <a class="collapse-item" href="adminusuarios.php">Usuarios</a>
                         <a class="collapse-item" href="adminconductores.php">Conductores</a>
                         <a class="collapse-item" href="adminreservacion.php">Reservaciones</a>
                         <a class="collapse-item" href="adminrutas.php">Rutas</a>
+                      
+                    
                     </div>
                 </div>
             </li>
@@ -345,7 +347,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Inicio</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Conductores</h1>
                     
                                 </i></a>
                     </div>
@@ -354,24 +356,77 @@
                     <div class="row">
 
                   
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        
-
-                        <!-- Pending Requests Card Example -->
-                        
-
-                    <!-- Content Row -->
-
+    
                     <div class="row">
+    
+                    <div class="container-fluid">
 
-                        <!-- Area Chart -->
-                        
-                        <!-- Pie Chart -->
-                        
-                                <!-- Card Body -->
-                                
+                    <table>
+                    
+                            
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Edad</th>
+                                            <th>Permiso de Conducir</th>
+                                            <th>Numero de Camioneta</th>
+                                            <th>Numero Telefonico</th>
+                                            <th>Ruta</th>
+                                            
+                                        </tr>
+                                        
+                                        
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                           
+                                           
+                                        </tr>
+                                        <?php
+ 
+ $conn=mysqli_connect('localhost','root','','integradora') or die ('Error en la conexion servidosr') ; 
+ $id = $_GET["id"];
 
+      $consulta= "SELECT * FROM conductores where ID='$id'";
+      $resultado= mysqli_query($conn,$consulta); 
+
+      while($row=mysqli_fetch_array($resultado)){
+    ?>
+                                        <tr>
+                                        
+                                        <form action="actualizartconduc.php" method="post"> 
+                                           <input type="hidden" name=id value=<?php echo $row['ID']?>>
+                                        <td><input type="text" name=nombre value=<?php echo $row['Nombre']?>></td>
+                                        <td><input type="text" name=edad value=<?php echo $row['Edad']?>></td>
+                                        <td><input type="text" name=permiso value=<?php echo $row['Permiso_condu']?>></td>
+                                        <td><input type="text" name=numerocam value=<?php echo $row['Numero_cam']?>></td>
+                                        <td><input type="text" name=numerotel value=<?php echo $row['Numero_tel']?>></td>
+                                       
+       <td><input type="text" name=ruta value=<?php echo $row['Ruta']?>>
+                                        <tr><td><input type="submit" class="btn btn-primary" value="actualizar" name="register">
+      
+                                        </tr>
+      <?php
+      }
+      ?>
+        </div>
+                      
+          
+    
+    
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
                
                                 </div>
                             </div>
@@ -425,7 +480,6 @@
             </div>
         </div>
     </div>
-
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -442,6 +496,7 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+   
 
 </body>
 
